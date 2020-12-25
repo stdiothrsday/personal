@@ -1,0 +1,63 @@
+nav{
+    opacity: 0.85;
+}
+
+.jumbotron
+{
+background-color: white;
+}
+
+body
+{
+    font-family: 'Press Start 2P', cursive;
+    background-color: whitesmoke;
+}
+
+.container
+{
+background-color: white;
+}
+
+.container .row p
+{
+display: none;
+}
+
+#main
+{
+     color: grey;
+}
+
+footer a
+{
+color:#768535;
+font-weight: bold;
+}
+
+nav a
+{
+color:white;
+font-weight: bold;
+}
+
+a:hover
+{
+color:#7f7f7f;
+}
+
+::selection
+{
+background:#f3f3f2;
+}
+
+.carousel-inner>.item
+{
+    -webkit-transition: -webkit-transform 1.2s ease-in-out !important;
+    -o-transition: -o-transform 1.2s ease-in-out !important;
+    transition: transform 1.2s ease-in-out !important;
+}
+
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}

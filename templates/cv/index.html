@@ -1,0 +1,62 @@
+{% extends 'cv/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Welcome</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron mt-5">
+        <h1 class="display-2">Welcome!</h1>
+        <p class="lead">This is my personal projects page. I use this webpage to showcase projects that ive worked on. As well as personal projects. I use different technologies and different languages, feel free to look around</p>
+        <hr class="my-4">
+
+        <p style="background-image: url({% static 'img/waterfall.jpg' %})" class="lead">
+            <a class="btn btn-success btn-lg " href="#" role="button">Cant decide, go to a random page!</a>
+        </p>
+    </div>
+
+     <h1 class="display-3">Featured Programs</h1>
+
+    <hr>
+
+    <div class="row">
+
+        <div id="f1" class="col-3 border rounded">
+            <img class="p-1 img-fluid" src="{% static 'img/calc.gif' %}">
+        </div>
+        <div id="f1p" class="col-3">
+            <button id="b1" type="button" class="btn btn-outline-success">Learn More</button>
+            <p>A program that simulates a calculators functionality. Written with java and javafx for gui. Mainly built to practice input validation and exception handling</p>
+        </div>
+
+        <div id="f2" class="col-3 border rounded">
+            <img class="p-1 img-fluid" src="{% static 'img/safe.gif'%}">
+        </div>
+        <div id="f2p" class="col-3">
+            <button id="b2" type="button" class="btn btn-outline-success">Learn More</button>
+            <p>A program that simulates a combination lock. This program was written in java with javafx. I wrote this program primarily to practice gui features, placement, color, texts, events.</p>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div id="f3" class="col-3 border rounded">
+            <img class="p-1 img-fluid" src="{% static 'img/coin.gif' %}">
+        </div>
+        <div id="f3p" class="col-3">
+            <button id="b3" type="button" class="btn btn-outline-success">Learn More</button>
+            <p>A simple coin flip. I wrote this coin flip program early on as an assignment, for programming in Visual Basic. The program was a good illustration/practice of conditional logic, code wise and visually. This was a good starting point so I chose to include it on the homepage.</p>
+        </div>
+
+        <div id="f4" class="col-3 border rounded">
+            <img class="p-1 img-fluid" src="{% static 'img/cart.gif' %}">
+        </div>
+        <div id="f4p" class="col-3">
+            <button id="b4" type="button" class="btn btn-outline-success">Learn More</button>
+            <p>Simple shopping cart program, used to purchase books. I wrote this program as a starting point for creating windows applications. It features menus, multiple screens, buttons, calculation, context menus, keyboard/mouse input</p>
+        </div>
+
+    </div>
+{% endblock %}

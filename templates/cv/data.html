@@ -1,0 +1,1145 @@
+{% extends 'cv/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Data/File Structures</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron mt-5">
+        <h1 class="display-2">Data/File Structures</h1>
+        <p class="lead">Writing good programs isnt just about creating solutions that work, but one that is also the most efficient and can be scaled up. That is the primary objective of studying data and file structures</p>
+        <hr class="my-4">
+
+        <p style="background-image: url({% static 'img/waterfall.jpg' %})" class="lead">
+        </p>
+    </div>
+
+    <h3 id="d1">Recursive functions<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg> </h3>
+    <div id="dprog1" class="row">
+
+        <div class="col-4">
+            Binary search
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>int bcount=0;
+    public int recbin(int[] list,int n,int low,int high)
+    {
+        int middle=(low+high)/2;
+        if (list[middle]==n)
+        {
+            System.out.println(&quot;The total # of recursive calls is &quot;+bcount);
+            return middle;
+        }
+        else if (low&gt;high)
+            return -1;
+        else if (list[middle]&lt;n)
+        {
+            bcount++;
+            return recbin(list,n,middle+1,high);
+        }
+        else
+        {
+            bcount++;
+            return recbin(list,n,low,middle-1);
+        }
+    }
+</code></pre>
+        </div>
+
+        <div class="col-4">
+            N factorial
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>int fcount=0;
+    public int recfact(int n)
+    {
+        if(n==0)
+        {
+            System.out.println(&quot;The total # of recursive calls is &quot;+fcount);
+            return 1;
+        }
+        else
+        {
+            fcount++;//* recursive function is called
+            return n*recfact(n-1);
+        }
+    }
+</code></pre>
+        </div>
+
+        <div class="col-4">
+            Fibonacci sequence
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>public int recfib(int n)
+    {
+        if(n==0)
+            return 0;
+        else if(n==1)
+            return 1;
+        else
+            return recfib(n-1)+recfib(n-2);
+    }
+</code></pre>
+        </div>
+
+        <img class="img-fluid" src="{% static 'img/data/d1.jpg' %}">
+
+    </div>
+
+    <hr>
+    <h3 id="d2">Sort efficiancy<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg> </h3>
+    <div id="dprog2" class="row">
+
+        <div class="col-4">
+            <h6>Insertion sort</h6>
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>public void insertionsort(int[] list)
+    {
+        int compare=0;
+        int exchange=0;
+        int[] output = new int[list.length];
+
+        for(int i=0;i&lt;list.length;i++)
+        {
+            output[i]=list[i];
+        }
+
+        //System.out.println(&quot;Input&quot;+Arrays.toString(list));
+        for(int i=1;i&lt;output.length;i++)
+        {
+            int j=i;
+            while(j&gt;0)
+            {
+                compare++;
+                if(output[j]&lt;output[j-1])
+                {
+                    int temp = output[j];
+                    output[j] = output[j-1];
+                    output[j-1] = temp;
+                    exchange++;
+                }
+                j--;
+            }
+        }
+        //System.out.println(&quot;Output&quot;+Arrays.toString(output));
+        System.out.println(&quot;Comparisons= &quot;+compare);
+        System.out.println(&quot;Exchanges= &quot;+exchange);
+    }
+</code></pre>
+
+            <img class="img-fluid" src="{% static 'img/data/d2.JPG' %}">
+            &nbsp;
+            <img class="img-fluid" src="{% static 'img/data/d2-4.JPG' %}">
+            
+        </div>
+
+        <div class="col-4">
+            <h6>Selection sort</h6>
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>public static void selectionsort(int list[])
+    {
+        int compare=0;
+        int exchange=0;
+        int[] output = new int[list.length];
+
+        for(int i=0;i&lt;list.length;i++)
+        {
+            output[i]=list[i];
+        }
+
+        //System.out.println(&quot;Input&quot;+Arrays.toString(list));
+        for (int i=0;i&lt;output.length-1;i++)
+        {
+            int min=i;
+            for (int j=i+1;j&lt;output.length;j++)
+            {
+                compare++;
+                if (output[j]&lt;output[min])
+                    min=j;
+            }
+            int temp = output[min];
+            output[min] = output[i];
+            output[i] = temp;
+            exchange++;
+        }
+        //System.out.println(&quot;Output&quot;+Arrays.toString(output));
+        System.out.println(&quot;Comparisons= &quot;+compare);
+        System.out.println(&quot;Exchanges= &quot;+exchange);
+    }
+</code></pre>
+
+            <img class="img-fluid" src="{% static 'img/data/d2-2.JPG' %}">
+            &nbsp;
+            <img class="img-fluid" src="{% static 'img/data/d2-5.JPG' %}">
+
+        </div>
+
+        <div class="col-4">
+            <h6>Bubble sort</h6>
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>public static void bubblesort(int list[])
+    {
+        int compare=0;
+        int exchange=0;
+        int[] output = new int[list.length];
+
+        for(int i=0;i&lt;list.length;i++)
+        {
+            output[i]=list[i];
+        }
+        //System.out.println(&quot;Input&quot;+Arrays.toString(list));
+
+        Boolean cont=true;
+        for (int i=1; i != output.length; i++)
+        {
+            if (cont)
+            {
+                cont = false;
+                for (int j=0; j!=output.length-i; j++)
+                {
+                    compare++;
+                    if (output[j]&gt;output[j+1])
+                    {
+                        int temp = output[j];
+                        output[j] = output[j+1];
+                        output[j+1] = temp;
+                        cont=true;
+                        exchange++;
+                    }
+                }
+            }
+            else
+                break;
+        }
+        //System.out.println(&quot;Output&quot;+Arrays.toString(output));
+        System.out.println(&quot;Comparisons= &quot;+compare);
+        System.out.println(&quot;Exchanges= &quot;+exchange);
+    }
+</code></pre>
+
+            <img class="img-fluid" src="{% static 'img/data/d2-3.JPG' %}">
+            &nbsp;
+            <img class="img-fluid" src="{% static 'img/data/d2-6.JPG' %}">
+
+        </div>
+
+    </div>
+
+    <hr>
+    <h3 id="d3">Binary expression tree traversal<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg> </h3>
+    <div id="dprog3" class="row">
+        <div class="col-3">
+            <h6>Infix queue</h6>
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>/**
+ * Queue for infix expression.
+ *
+ * @author (Yaw Abaaho)
+ * @version (3/18/20)
+ */
+import java.io.*;
+import java.util.*;
+import java.lang.String;
+public class infix
+{
+    private Node infix;
+    int size;
+    Node front;
+    Node rear;
+    public infix()
+    {
+        size = 0;
+        infix=null;
+        front=null;
+        rear=null;
+    }
+
+    public void enqueue(String exp)
+    {
+        Node node;
+        Node curr;
+        int i=0;
+        while(i&lt;exp.length())
+        {
+            node=new Node(exp.substring(i,i+1));
+            if(infix==null)
+            {
+                infix=node;
+                front=node;
+                size++;
+            }
+            else
+            {
+                curr=infix;
+                while (curr.next!=null)
+                    curr = curr.next;
+                curr.next = node;
+                rear=node;
+                size++;
+            }
+            i++;
+        }
+    }
+
+    public String dequeue()
+    {
+        String f=&quot;&quot;;
+        if(size!=0)
+        {
+            f = front.data;
+            front=infix.next;
+            infix=infix.next;
+            size--;
+        }
+        else
+        {
+            f=&quot;empty&quot;;
+        }
+        return f;
+    }
+
+    public int size()
+    {
+        return size;
+    }
+
+    public boolean empty()
+    {
+        if(size==0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public String front()
+    {
+        if(size!=0)
+        {
+            return front.getData();
+        }
+        else
+            return &quot;empty&quot;;
+    }
+
+    public void print()
+    {
+        if(size!=0)
+        {
+            Node curr=infix;
+            while(curr!=null)
+            {
+                System.out.print(curr.data);
+                curr=curr.next;
+            }
+        }
+        else
+            System.out.println(&quot;empty&quot;);
+    }
+
+    public int infixPriority()
+    {
+        int answer=0;
+        Node curr=infix;
+        String exp = curr.data;
+        if(isNumeric(exp)==false)
+        {
+            switch(exp)
+            {
+                case &quot;*&quot;:
+                {
+                    answer= 2;
+                    break;
+                }
+
+                case &quot;/&quot;:
+                {
+                    answer= 2;
+                    break;
+                }
+
+                case &quot;+&quot;:
+                {
+                    answer= 1;
+                    break;
+                }
+
+                case &quot;-&quot;:
+                {
+                    answer= 1;
+                    break;
+                }
+
+                case &quot;(&quot;:
+                {
+                    answer= 3;
+                    break;
+                }
+
+                case &quot;)&quot;:
+                {
+                    answer= 0;
+                    break;
+                }
+
+                case &quot;#&quot;:
+                {
+                    answer= 0;
+                    break;
+                }
+            }
+        }
+        return answer;
+    }
+
+    public static boolean isNumeric(String exp)
+    {
+        try
+        {
+            Integer.parseInt(exp);
+            return true;
+        } catch(NumberFormatException something)
+        {
+            return false;
+        }
+    }
+
+    private class Node
+    {
+        public String data;
+        public Node next;
+
+        Node(String exp)
+        {
+            data=exp;
+            next=null;
+        }
+
+        public String getData()
+        {
+            return data;
+        }
+    }
+}
+</code></pre>
+        </div>
+
+        <div class="col-3">
+            <h6>Postfix queue</h6>
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>/**
+ * Queue for postfix expression.
+ *
+ * @author (Yaw Abaaho)
+ * @version (3/18/20)
+ */
+import java.io.*;
+import java.util.*;
+import java.lang.String;
+public class postfix
+{
+    private Node postfix;
+    int size;
+    Node front;
+    Node rear;
+    public postfix()
+    {
+        size = 0;
+        postfix=null;
+        front=null;
+        rear=null;
+    }
+
+    public void enqueue(String exp)
+    {
+        Node node;
+        Node curr;
+        node=new Node(exp);
+        if(postfix==null)
+        {
+            postfix=node;
+            front=node;
+            size++;
+        }
+        else
+        {
+            curr=postfix;
+            while (curr.next!=null)
+                curr = curr.next;
+            curr.next = node;
+            rear=node;
+            size++;
+        }
+    }
+
+    public String dequeue()
+    {
+        String f=&quot;&quot;;
+        if(size!=0)
+        {
+            f = front.data;
+            front=postfix.next;
+            postfix=postfix.next;
+            size--;
+        }
+        else
+        {
+            f=&quot;empty&quot;;
+        }
+        return f;
+    }
+
+    public int size()
+    {
+        System.out.println(size);
+        return size;
+    }
+
+    public boolean empty()
+    {
+        if(size==0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public String front()
+    {
+        if(size!=0)
+        {
+            return front.getData();
+        }
+        else
+            return &quot;empty&quot;;
+    }
+
+    public void print()
+    {
+        if(size!=0)
+        {
+            Node curr=postfix;
+            while(curr!=null)
+            {
+                System.out.print(curr.data);
+                curr=curr.next;
+            }
+        }
+        else
+            System.out.println(&quot;empty&quot;);
+    }
+
+    private class Node
+    {
+        public String data;
+        public Node next;
+
+        Node(String exp)
+        {
+            data=exp;
+            next=null;
+        }
+
+        public String getData()
+        {
+            return data;
+        }
+    }
+}
+</code></pre>
+        </div>
+
+        <div class="col-3">
+            <h6>Operation stack</h6>
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>/**
+ * Stack for operators.
+ *
+ * @author (Yaw Abaaho)
+ * @version (3/20/20)
+ */
+import java.io.*;
+import java.util.*;
+import java.lang.String;
+public class opstack
+{
+    private Node opstack;
+    Node top;
+    int size;
+
+    public opstack()
+    {
+        opstack=null;
+        top=null;
+        size = 0;
+    }
+
+    public void push(String exp)
+    {
+        Node node =  new Node(exp);
+        node.next=opstack;
+        opstack=node;
+        top=node;
+        size++;
+    }
+
+    public String pop()
+    {
+        String t=&quot;&quot;;
+        if(size!=0)
+        {
+            t=top.data;
+            opstack=opstack.next;
+            top=top.next;
+            size--;
+        }
+        else
+        {
+            t=&quot;empty&quot;;
+        }
+        //System.out.println(t);
+        return t;
+    }
+
+    public int size()
+    {
+        return size;
+    }
+
+    public boolean empty()
+    {
+        if(size==0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public String ontop()
+    {
+        if(size!=0)
+        {
+            return top.data;
+        }
+        else
+            return &quot;empty&quot;;
+    }
+
+    public void print()
+    {
+        if(opstack!=null)
+        {
+            Node curr=opstack;
+            while(curr!=null)
+            {
+                System.out.print(curr.data);
+                curr=curr.next;
+            }
+        }
+        else
+        {
+            System.out.println(&quot;empty&quot;);
+        }
+    }
+
+    public int StackPriority()
+    {
+        int answer=0;
+        Node curr=opstack;
+        String exp = curr.data;
+        if(isNumeric(exp)==false)
+        {
+            switch(exp)
+            {
+                case &quot;*&quot;:
+                {
+                    answer= 2;
+                    break;
+                }
+
+                case &quot;/&quot;:
+                {
+                    answer= 2;
+                    break;
+                }
+
+                case &quot;+&quot;:
+                {
+                    answer= 1;
+                    break;
+                }
+
+                case &quot;-&quot;:
+                {
+                    answer= 1;
+                    break;
+                }
+
+                case &quot;(&quot;:
+                {
+                    answer= 3;
+                    break;
+                }
+
+                case &quot;#&quot;:
+                {
+                    answer= 0;
+                    break;
+                }
+            }
+        }
+        return answer;
+    }
+
+    public static boolean isNumeric(String exp)
+    {
+        try
+        {
+            Integer.parseInt(exp);
+            return true;
+        } catch(NumberFormatException something)
+        {
+            return false;
+        }
+    }
+
+    private class Node
+    {
+        public String data;
+        public Node next;
+        Node(String exp)
+        {
+            data=exp;
+            next=null;
+        }
+
+        public String getData()
+        {
+            return data;
+        }
+    }
+}
+</code></pre>
+        </div>
+
+        <div class="col-3">
+            <h6>Eval stack</h6>
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>/**
+ * Stack for evaluation.
+ *
+ * @author (Yaw Abaaho)
+ * @version (3/20/20)
+ */
+import java.io.*;
+import java.util.*;
+import java.lang.String;
+public class evalstack
+{
+    private Node evalstack;
+    Node top;
+    int size;
+    public evalstack()
+    {
+        evalstack=null;
+        top=null;
+        size = 0;
+    }
+
+    public void push(String exp)
+    {
+        Node node =  new Node(exp);
+        node.next=evalstack;
+        evalstack=node;
+        top=node;
+        size++;
+    }
+
+    public String pop()
+    {
+        String t=&quot;&quot;;
+        if(size!=0)
+        {
+            t=top.data;
+            evalstack=evalstack.next;
+            top=top.next;
+            size--;
+        }
+        else
+        {
+            t=&quot;empty&quot;;
+        }
+        return t;
+    }
+
+    public int size()
+    {
+        return size;
+    }
+
+    public boolean empty()
+    {
+        if(size==0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public String ontop()
+    {
+        if(size!=0)
+        {
+            return top.data;
+        }
+        else
+            return &quot;empty&quot;;
+    }
+
+    public void print()
+    {
+        if(evalstack!=null)
+        {
+            Node curr=evalstack;
+            while(curr!=null)
+            {
+                System.out.print(curr.data);
+                curr=curr.next;
+            }
+        }
+        else
+        {
+            System.out.println(&quot;empty&quot;);
+        }
+    }
+
+    private class Node
+    {
+        public String data;
+        public Node next;
+        Node(String exp)
+        {
+            data=exp;
+            next=null;
+        }
+
+        public String getData()
+        {
+            return data;
+        }
+    }
+}
+</code></pre>
+
+        </div>
+        <div class="col-12"><img class="img-fluid" src="{% static 'img/data/d3.jpg' %}"></div>
+
+    </div>
+
+    <hr>
+    <h3 id="d4">Advanced sort efficiancy<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg> </h3>
+    <div id="dprog4" class="row">
+        <div class="col-4">
+        <h6>Heap Sort</h6>
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>/**
+ * Heap sort
+ *
+ * @author (Yaw Abaaho)
+ * @version (4/14/20)
+ */
+import java.io.*;
+import java.util.*;
+public class driver
+{
+    private static int size;
+    private static int compare=0;
+    private static int exchange=0;
+
+    public static void sort(int arr[])
+    {
+        heapify(arr);
+        for (int i=size;i&gt;0;i--)
+        {
+            swap(arr,0, i);
+
+            size = size-1;
+            maxheap(arr, 0);
+        }
+    }
+
+    //build heap
+    public static void heapify(int arr[])
+    {
+        size=arr.length-1;
+        for (int i=size/2; i&gt;=0; i--)
+        {
+            maxheap(arr, i);
+        }
+    }
+
+    public static void maxheap(int arr[], int i)
+    {
+        int left = 2*i ;
+        int right = 2*i + 1;
+        int largest = i;
+
+        if (left&lt;=size&amp;&amp;right&lt;=size)
+        {
+            if(arr[left]&gt;arr[i])
+            {
+                largest = left;
+                compare++;
+            }
+            if(arr[right]&gt;arr[largest])
+            {
+                largest = right;
+                compare++;
+            }
+        }
+        if (largest!=i)
+        {
+            swap(arr, i, largest);
+            maxheap(arr, largest);
+        }
+    }
+
+    public static void swap(int arr[],int i,int j)
+    {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+        exchange++;
+    }
+
+    public static void main(String[] args) throws IOException
+    {
+        //small data
+        int sorted[]= new int[11];
+
+        int reverse[]= new int[11];
+
+        int random1[]= new int[11];
+        int random2[]= new int[11];
+        int random3[]= new int[11];
+
+        //big data
+        int bigsorted[]= new int[2001];
+
+        int bigreverse[]= new int[2001];
+
+        int bigrandom1[]= new int[2001];
+        int bigrandom2[]= new int[2001];
+        int bigrandom3[]= new int[2001];
+
+        //Small data set init
+        Scanner scan = new Scanner(new File(&quot;sorted.txt&quot;));
+        int i=1;
+        while(scan.hasNext())
+        {
+            sorted[i]=scan.nextInt();
+            i++;
+        }
+
+        scan = new Scanner(new File(&quot;reverse.txt&quot;));
+        i=1;
+        while(scan.hasNext())
+        {
+            reverse[i]=scan.nextInt();
+            i++;
+        }
+
+        scan = new Scanner(new File(&quot;rand1.txt&quot;));
+        i=1;
+        while(scan.hasNext())
+        {
+            random1[i]=scan.nextInt();
+            i++;
+        }
+
+        scan = new Scanner(new File(&quot;rand2.txt&quot;));
+        i=1;
+        while(scan.hasNext())
+        {
+            random2[i]=scan.nextInt();
+            i++;
+        }
+
+        scan = new Scanner(new File(&quot;rand3.txt&quot;));
+        i=1;
+        while(scan.hasNext())
+        {
+            random3[i]=scan.nextInt();
+            i++;
+        }
+
+        //Big data set init
+        scan = new Scanner(new File(&quot;bigsorted.txt&quot;));
+        i=1;
+        while(scan.hasNext())
+        {
+            bigsorted[i]=scan.nextInt();
+            i++;
+        }
+
+        scan = new Scanner(new File(&quot;bigreverse.txt&quot;));
+        i=1;
+        while(scan.hasNext())
+        {
+            bigreverse[i]=scan.nextInt();
+            i++;
+        }
+
+        scan = new Scanner(new File(&quot;bigrand1.txt&quot;));
+        i=1;
+        while(scan.hasNext())
+        {
+            bigrandom1[i]=scan.nextInt();
+            i++;
+        }
+
+        scan = new Scanner(new File(&quot;bigrand2.txt&quot;));
+        i=1;
+        while(scan.hasNext())
+        {
+            bigrandom2[i]=scan.nextInt();
+            i++;
+        }
+
+        scan = new Scanner(new File(&quot;bigrand3.txt&quot;));
+        i=1;
+        while(scan.hasNext())
+        {
+            bigrandom3[i]=scan.nextInt();
+            i++;
+        }
+
+        //Small Data Set
+        System.out.println(&quot;Small Data Set\n&quot;);
+
+        System.out.println(&quot;Sorted:&quot;);
+        System.out.println(&quot;Input&quot;+Arrays.toString(sorted));
+        sort(sorted);
+        System.out.println(&quot;Comparisons: &quot;+compare);
+        System.out.println(&quot;Exchanges: &quot;+exchange);
+
+        exchange=0;
+        compare=0;
+        System.out.println(&quot;Output&quot;+Arrays.toString(sorted));
+
+        System.out.println(&quot;\nReversed:&quot;);
+        System.out.println(&quot;Input&quot;+Arrays.toString(reverse));
+        sort(reverse);
+        System.out.println(&quot;Comparisons: &quot;+compare);
+        System.out.println(&quot;Exchanges: &quot;+exchange);
+
+        exchange=0;
+        compare=0;
+        System.out.println(&quot;Output&quot;+Arrays.toString(reverse));
+
+        System.out.println(&quot;\nAverage 1:&quot;);
+        System.out.println(&quot;Input&quot;+Arrays.toString(random1));
+        sort(random1);
+        System.out.println(&quot;Comparisons: &quot;+compare);
+        System.out.println(&quot;Exchanges: &quot;+exchange);
+
+        exchange=0;
+        compare=0;
+        System.out.println(&quot;Output&quot;+Arrays.toString(random1));
+
+        System.out.println(&quot;\nAverage 2:&quot;);
+        System.out.println(&quot;Input&quot;+Arrays.toString(random2));
+        sort(random2);
+        System.out.println(&quot;Comparisons: &quot;+compare);
+        System.out.println(&quot;Exchanges: &quot;+exchange);
+
+        exchange=0;
+        compare=0;
+        System.out.println(&quot;Output&quot;+Arrays.toString(random2));
+
+        System.out.println(&quot;\nAverage 3:&quot;);
+        System.out.println(&quot;Input&quot;+Arrays.toString(random3));
+        sort(random3);
+        System.out.println(&quot;Comparisons: &quot;+compare);
+        System.out.println(&quot;Exchanges: &quot;+exchange);
+
+        exchange=0;
+        compare=0;
+        System.out.println(&quot;Output&quot;+Arrays.toString(random3));
+
+        //Big Data Set
+        System.out.println(&quot;Big Data Set\n&quot;);
+
+        System.out.println(&quot;Sorted:&quot;);
+        //System.out.println(&quot;Input&quot;+Arrays.toString(bigsorted));
+        sort(bigsorted);
+        System.out.println(&quot;Comparisons: &quot;+compare);
+        System.out.println(&quot;Exchanges: &quot;+exchange);
+
+        exchange=0;
+        compare=0;
+        //System.out.println(&quot;Output&quot;+Arrays.toString(bigsorted));
+
+        System.out.println(&quot;\nReversed:&quot;);
+        //System.out.println(&quot;Input&quot;+Arrays.toString(bigreverse));
+        sort(bigreverse);
+        System.out.println(&quot;Comparisons: &quot;+compare);
+        System.out.println(&quot;Exchanges: &quot;+exchange);
+
+        exchange=0;
+        compare=0;
+        //System.out.println(&quot;Output&quot;+Arrays.toString(bigreverse));
+
+        System.out.println(&quot;\nAverage 1:&quot;);
+        //System.out.println(&quot;Input&quot;+Arrays.toString(bigrandom1));
+        sort(bigrandom1);
+        System.out.println(&quot;Comparisons: &quot;+compare);
+        System.out.println(&quot;Exchanges: &quot;+exchange);
+
+        exchange=0;
+        compare=0;
+        //System.out.println(&quot;Output&quot;+Arrays.toString(bigrandom1));
+
+        System.out.println(&quot;\nAverage 2:&quot;);
+        //System.out.println(&quot;Input&quot;+Arrays.toString(bigrandom2));
+        sort(bigrandom2);
+        System.out.println(&quot;Comparisons: &quot;+compare);
+        System.out.println(&quot;Exchanges: &quot;+exchange);
+
+        exchange=0;
+        compare=0;
+        //System.out.println(&quot;Output&quot;+Arrays.toString(bigrandom2));
+
+        System.out.println(&quot;\nAverage 3:&quot;);
+        //System.out.println(&quot;Input&quot;+Arrays.toString(bigrandom3));
+        sort(bigrandom3);
+        System.out.println(&quot;Comparisons: &quot;+compare);
+        System.out.println(&quot;Exchanges: &quot;+exchange);
+
+        exchange=0;
+        compare=0;
+        //System.out.println(&quot;Output&quot;+Arrays.toString(bigrandom3));
+    }
+}
+</code></pre>
+        </div>
+
+        <div class="col-4">
+            <img class="img-fluid" src="{% static 'img/data/d4-1.JPG' %}">
+
+        </div>
+        <div class="col-4">
+            <img class="img-fluid" src="{% static 'img/data/d4-2.JPG' %}">
+        </div>
+    </div>
+
+{% endblock %}

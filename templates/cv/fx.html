@@ -1,0 +1,180 @@
+{% extends 'cv/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>JavaFX</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron mt-5">
+        <h1 class="display-2">JavaFx</h1>
+        <p class="lead">Explain the purpose of this page</p>
+        <hr class="my-4">
+
+        <p style="background-image: url({% static 'img/waterfall.jpg' %})" class="lead">
+        </p>
+    </div>
+
+    <h3 id="fx1">Change conversion<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg></h3>
+    <div id="fxprog1" class="row">
+        <div class="col-6">
+            <div class="row">
+                <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+/**
+ * JavaFX class p5 creates a scene with with change conversions.
+ *
+ * @author (Yaw Abaaho)
+ * @version (11/24/19)
+ */
+public class P5 extends Application
+{
+    public void start(Stage stage)
+    {
+        Scene scene = new Scene(new P5Pane(), 500, 300);
+        stage.setTitle(&quot;Change with Minimal Number of Coins&quot;);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+}
+</code></pre>
+            </div>
+            <div class="row">
+                <img class="d-block" src="{% static 'img/fx/fx1.gif' %}">
+            </div>
+        </div>
+
+        <div class="col-6">
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+
+/**
+ * JavaFX class P5Pane has labels and textfield for change conversion.
+ *
+ * @author (Yaw Abaaho)
+ * @version (11/24/19)
+ */
+public class P5Pane extends GridPane
+{
+    private Label quarters;
+    private Label dimes;
+    private Label nickels;
+    private Label pennies;
+    private TextField change;
+
+    public P5Pane()
+    {
+        Font font = new Font(18);
+
+        Label inputLabel = new Label(&quot;Change Amount 0 to 99 cents:&quot;);
+        inputLabel.setFont(font);
+        GridPane.setHalignment(inputLabel, HPos.RIGHT);
+
+        Label outputLabel1 = new Label(&quot;Quarters:&quot;);
+        outputLabel1.setFont(font);
+        GridPane.setHalignment(outputLabel1, HPos.RIGHT);
+
+        Label outputLabel2 = new Label(&quot;Dimes:&quot;);
+        outputLabel2.setFont(font);
+        GridPane.setHalignment(outputLabel2, HPos.RIGHT);
+
+        Label outputLabel3 = new Label(&quot;Nickels:&quot;);
+        outputLabel3.setFont(font);
+        GridPane.setHalignment(outputLabel3, HPos.RIGHT);
+
+        Label outputLabel4 = new Label(&quot;Pennies:&quot;);
+        outputLabel4.setFont(font);
+        GridPane.setHalignment(outputLabel4, HPos.RIGHT);
+
+        quarters = new Label(&quot;---&quot;);
+        quarters.setFont(font);
+        GridPane.setHalignment(quarters, HPos.CENTER);
+
+        dimes = new Label(&quot;---&quot;);
+        dimes.setFont(font);
+        GridPane.setHalignment(dimes, HPos.CENTER);
+
+        nickels = new Label(&quot;---&quot;);
+        nickels.setFont(font);
+        GridPane.setHalignment(nickels, HPos.CENTER);
+
+        pennies = new Label(&quot;---&quot;);
+        pennies.setFont(font);
+        GridPane.setHalignment(pennies, HPos.CENTER);
+
+        change = new TextField();
+        change.setFont(font);
+        change.setPrefWidth(50);
+        change.setAlignment(Pos.CENTER);
+        change.setOnAction(this::convertChange);
+
+        setAlignment(Pos.CENTER);
+        setHgap(20);
+        setVgap(10);
+        setStyle(&quot;-fx-background-color: yellow&quot;);
+
+        add(inputLabel, 0, 0);
+        add(change, 1, 0);
+
+        add(outputLabel1, 0, 1);
+        add(quarters, 1, 1);
+
+        add(outputLabel2, 0,2);
+        add(dimes, 1, 2);
+
+        add(outputLabel3, 0, 3);
+        add(nickels, 1, 3);
+
+        add(outputLabel4, 0, 4);
+        add(pennies, 1, 4);
+    }
+
+    private void convertChange(ActionEvent event)
+    {
+        int changeAmount = Integer.parseInt(change.getText());
+        int quarter = changeAmount/25;
+
+        changeAmount=changeAmount%25;
+        int dime = changeAmount/10;
+
+        changeAmount=changeAmount%10;
+        int nickel = changeAmount/5;
+
+        changeAmount=changeAmount%5;
+        int penny = changeAmount/1;
+
+        quarters.setText(quarter + &quot;&quot;);
+        dimes.setText(dime + &quot;&quot;);
+        nickels.setText(nickel + &quot;&quot;);
+        pennies.setText(penny + &quot;&quot;);
+    }
+}
+</code></pre>
+        </div>
+    </div>
+    <hr>
+
+    <h3 id="fx">sample<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg></h3>
+    <div id="fxprog" class="row">
+        <div class="col">hey</div>
+    </div>
+    <hr>
+
+{% endblock %}
