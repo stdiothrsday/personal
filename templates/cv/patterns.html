@@ -7,13 +7,27 @@
 
 {% block body %}
 
-<div class="jumbotron mt-5">
+    <div class="jumbotron mt-5">
         <h1 class="display-2">Design Patterns</h1>
-        <p class="lead">Explain the purpose of this page</p>
+        <p class="lead">After designing software solutions for some time, common solutions emerge. These are known as design patterns. The primary focus of this page is to highlight my semester long group project that was voted as best project. This was allot of fun to make together, here are the results of our work </p>
         <hr class="my-4">
 
         <p style="background-image: url({% static 'img/waterfall.jpg' %})" class="lead">
         </p>
     </div>
+
+    <h3 id="ds1">2D shooter<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg></h3>
+    <div id="dsprog1" class="row">
+
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="{% static 'img/design/shooter.mp4' %}" allowfullscreen>
+
+            </iframe>
+        </div>
+
+    </div>
+    <hr>
 
 {% endblock %}

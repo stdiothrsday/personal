@@ -9,7 +9,7 @@
 
 <div class="jumbotron mt-5">
         <h1 class="display-2">JavaFx</h1>
-        <p class="lead">Explain the purpose of this page</p>
+        <p class="lead">Very powerful tools can be created using command line. But most users do interact with computers through command line. User want a graphics experience, thats where javafx comes in to match the graphics and user input with programming logic. More engaging solutions are created this way, take a look below </p>
         <hr class="my-4">
 
         <p style="background-image: url({% static 'img/waterfall.jpg' %})" class="lead">
@@ -169,12 +169,803 @@ public class P5Pane extends GridPane
     </div>
     <hr>
 
-    <h3 id="fx">sample<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+    <h3 id="fx2">Decimal to binary conversion<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg></h3>
+    <div id="fxprog2" class="row">
+        <div class="col-6">
+            <div class="row">
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+
+public class main extends Application
+{
+    @Override
+    public void start(Stage stage) throws Exception
+    {
+        Scene scene = new Scene(new binary(),500,500);
+        stage.setTitle(&quot;converter&quot;);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+}
+</code></pre>
+            </div>
+
+            <div class="row">
+                <img class="img-fluid" src="{% static 'img/fx/fx2.gif' %}">
+            </div>
+        </div>
+
+        <div class="col-6">
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.*;
+import java.util.*;
+import javafx.scene.transform.Rotate;
+import javafx.scene.layout.Pane;
+import javafx.scene.Group;
+import javafx.scene.layout.VBox;
+
+public class binary extends Pane
+{
+    Label title = new Label(&quot;Decimal to Binary&quot;);
+
+    TextField dec = new TextField(&quot;&quot;);
+    TextField bin = new TextField(&quot;&quot;);
+    Button conv = new Button(&quot;convert&quot;);
+    Button reset = new Button(&quot;reset&quot;);
+
+    String result = &quot;&quot;;
+
+    public binary()
+    {
+        Font font = new Font(15);
+
+        setStyle(&quot;-fx-background-color:lightgrey&quot;);
+
+        title.setFont(font);
+        title.setLayoutX(150);
+        title.setLayoutY(75);
+        title.setMinWidth(200);
+        title.setAlignment(Pos.CENTER);
+        title.setStyle(&quot;-fx-background-color:white&quot;);
+
+        dec.setFont(font);
+        dec.setLayoutX(100);
+        dec.setLayoutY(150);
+        dec.setMaxWidth(100);
+        dec.setMinHeight(100);
+        dec.setAlignment(Pos.CENTER);
+        dec.setStyle(&quot;-fx-background-color:white&quot;);
+
+        bin.setFont(font);
+        bin.setLayoutX(300);
+        bin.setLayoutY(150);
+        bin.setMaxWidth(100);
+        bin.setMinHeight(100);
+        bin.setAlignment(Pos.CENTER);
+        bin.setStyle(&quot;-fx-background-color:white&quot;);
+
+        conv.setFont(font);
+        conv.setLayoutX(100);
+        conv.setLayoutY(275);
+        conv.setMinWidth(100);
+        conv.setMinHeight(50);
+        conv.setAlignment(Pos.CENTER);
+        conv.setStyle(&quot;-fx-background-color:white&quot;);
+
+        reset.setFont(font);
+        reset.setLayoutX(300);
+        reset.setLayoutY(275);
+        reset.setMinWidth(100);
+        reset.setMinHeight(50);
+        reset.setAlignment(Pos.CENTER);
+        reset.setStyle(&quot;-fx-background-color:white&quot;);
+
+        getChildren().addAll(title,dec,bin,conv,reset);
+
+        dec.requestFocus();
+
+        conv.setOnAction(this::conv);
+        reset.setOnAction(this::reset);
+    }
+
+    private void conv(ActionEvent event)
+    {
+        try
+        {
+            int temp = Integer.parseInt(dec.getText());
+            while(temp!=0)
+            {
+                result=Integer.toString((temp%2))+result;
+                temp=temp/2;
+            }
+            bin.setText(result);
+            dec.setDisable(true);
+            bin.setDisable(true);
+            conv.setDisable(true);
+            reset.requestFocus();
+            temp=0;
+            result=&quot;&quot;;
+        }
+        catch(NumberFormatException ew)
+        {
+            dec.setAlignment(Pos.CENTER);
+            dec.setText(&quot;Enter a #&quot;);
+            conv.setDisable(true);
+        }
+    }
+
+    private void reset(ActionEvent event)
+    {
+        result=&quot;&quot;;
+        dec.setText(&quot;&quot;);
+        bin.setText(&quot;&quot;);
+        dec.setDisable(false);
+        bin.setDisable(false);
+        conv.setDisable(false);
+        dec.requestFocus();
+    }
+}
+</code></pre>
+        </div>
+    </div>
+    <hr>
+
+    <h3 id="fx3">Calculator<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg></h3>
+    <div id="fxprog3" class="row">
+        <div class="col-6">
+            <div class="row">
+                <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+
+/**
+ * JavaFX class p5 creates a scene with a calculator.
+ *
+ * @author (Yaw Abaaho)
+ * @version (11/24/19)
+ */
+public class calc extends Application
+{
+    public void start(Stage stage)
+    {
+        Scene scene = new Scene(new calcPane(),300,300);
+        stage.setTitle(&quot;Calculator&quot;);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+}
+</code></pre>
+            </div>
+            <div class="row">
+                <img src="{% static 'img/fx/fx3.gif' %}">
+            </div>
+        </div>
+
+        <div class="col-6">
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+
+public class calcPane extends GridPane
+{
+    Button c = new Button(&quot;C&quot;);
+    Button num7 = new Button(&quot;7&quot;);
+    Button num8 = new Button(&quot;8&quot;);
+    Button num9 = new Button(&quot;9&quot;);
+    Button div = new Button(&quot;%&quot;);
+    Button num4 = new Button(&quot;4&quot;);
+    Button num5 = new Button(&quot;5&quot;);
+    Button num6 = new Button(&quot;6&quot;);
+    Button mult = new Button(&quot;x&quot;);
+    Button num1 = new Button(&quot;1&quot;);
+    Button num2 = new Button(&quot;2&quot;);
+    Button num3 = new Button(&quot;3&quot;);
+    Button minus = new Button(&quot;-&quot;);
+    Button num0 = new Button(&quot;0&quot;);
+    Button per = new Button(&quot;.&quot;);
+    Button equal = new Button(&quot;=&quot;);
+    Button plus = new Button(&quot;+&quot;);
+
+    private TextField screen;
+
+    double inp1=0;
+    double inp2=0;
+    double result=0;
+    String op=&quot;&quot;;
+
+    Boolean arith = false;
+    public calcPane()
+    {
+        Font font = new Font(18);
+
+        screen = new TextField(&quot;&quot;);
+        screen.setFont(font);
+        screen.setPrefWidth(90);
+        screen.setStyle(&quot;-fx-background-color:white&quot;);
+        screen.setAlignment(Pos.BOTTOM_LEFT);
+
+        c.setOnAction(this::clear);
+        num7.setOnAction(this::num7);
+        num8.setOnAction(this::num8);
+        num9.setOnAction(this::num9);
+        div.setOnAction(this::div);
+
+        num4.setOnAction(this::num4);
+        num5.setOnAction(this::num5);
+        num6.setOnAction(this::num6);
+        mult.setOnAction(this::mult);
+
+        num1.setOnAction(this::num1);
+        num2.setOnAction(this::num2);
+        num3.setOnAction(this::num3);
+        minus.setOnAction(this::minus);
+
+        num0.setOnAction(this::num0);
+        per.setOnAction(this::per);
+        equal.setOnAction(this::equal);
+        plus.setOnAction(this::plus);
+
+        setAlignment(Pos.CENTER);
+        setHgap(10);
+        setVgap(10);
+        setStyle(&quot;-fx-background-color: lightblue&quot;);
+
+        add(c, 0, 0);
+        add(screen,1,0);
+        setColumnSpan(screen,3);
+
+        add(num7,0,1);
+        add(num8,1,1);
+        add(num9,2,1);
+        add(div,3,1);
+
+        add(num4,0,2);
+        add(num5,1,2);
+        add(num6,2,2);
+        add(mult,3,2);
+
+        add(num1,0,3);
+        add(num2,1,3);
+        add(num3,2,3);
+        add(minus,3,3);
+
+        add(num0,0,4);
+        add(per,1,4);
+        add(equal,2,4);
+        add(plus,3,4);
+    }
+
+    public boolean full()
+    {
+        boolean result=false;
+        if(screen.getLength()&gt;5)
+            result=true;
+        return result;
+    }
+
+    public void process()
+    {
+        if(arith==true){
+            num7.setDisable(true);
+            num8.setDisable(true);
+            num9.setDisable(true);
+            div.setDisable(true);
+            num4.setDisable(true);
+            num5.setDisable(true);
+            num6.setDisable(true);
+            mult.setDisable(true);
+            num1.setDisable(true);
+            num2.setDisable(true);
+            num3.setDisable(true);
+            minus.setDisable(true);
+            num0.setDisable(true);
+            per.setDisable(true);
+            equal.setDisable(true);
+            plus.setDisable(true);
+            arith=false;
+        }
+
+        inp1=0;
+        inp2=0;
+    }
+
+    private void clear(ActionEvent event)
+    {
+        screen.setText(&quot;&quot;);
+
+        if(arith==false){
+            num7.setDisable(false);
+            num8.setDisable(false);
+            num9.setDisable(false);
+            div.setDisable(false);
+            num4.setDisable(false);
+            num5.setDisable(false);
+            num6.setDisable(false);
+            mult.setDisable(false);
+            num1.setDisable(false);
+            num2.setDisable(false);
+            num3.setDisable(false);
+            minus.setDisable(false);
+            num0.setDisable(false);
+            per.setDisable(false);
+            equal.setDisable(false);
+            plus.setDisable(false);
+        }
+
+        inp1=0;
+        inp2=0;
+    }
+
+    private void num7(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;7&quot;);
+    }
+
+    private void num8(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;8&quot;);
+    }
+
+    private void num9(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;9&quot;);
+    }
+
+    private void div(ActionEvent event)
+    {
+        inp1=Double.parseDouble(screen.getText());
+        screen.setText(&quot;&quot;);
+        op=&quot;/&quot;;
+    }
+
+    private void num4(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;4&quot;);
+    }
+
+    private void num5(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;5&quot;);
+    }
+
+    private void num6(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;6&quot;);
+    }
+
+    private void mult(ActionEvent event)
+    {
+        inp1=Double.parseDouble(screen.getText());
+        screen.setText(&quot;&quot;);
+        op=&quot;x&quot;;
+    }
+
+    private void num1(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;1&quot;);
+    }
+
+    private void num2(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;2&quot;);
+    }
+
+    private void num3(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;3&quot;);
+    }
+
+    private void minus(ActionEvent event)
+    {
+        inp1=Double.parseDouble(screen.getText());
+        screen.setText(&quot;&quot;);
+        op=&quot;minus&quot;;
+    }
+
+    private void num0(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;0&quot;);
+    }
+
+    private void per(ActionEvent event)
+    {
+        if(full()==false)
+            screen.setText(screen.getText()+&quot;.&quot;);
+    }
+
+    private void equal(ActionEvent event)
+    {
+        try
+        {
+            inp2=Double.parseDouble(screen.getText());
+        }
+        catch(NumberFormatException bh)
+        {
+            screen.setText(&quot;Enter Input&quot;);
+        }
+        screen.setText(&quot;&quot;);
+        arith=true;
+        switch(op)
+        {
+            case &quot;/&quot;:
+            try
+            {
+                result= inp1/inp2;
+                screen.setText(&quot;&quot;+result);
+            }
+            catch (ArithmeticException gh)
+            {
+                screen.setText(&quot;Error!&quot;);
+            }
+            break;
+
+            case &quot;x&quot;:
+            result= inp1*inp2;
+            screen.setText(&quot;&quot;+result);
+            break;
+
+            case &quot;minus&quot;:
+            result= inp1-inp2;
+            screen.setText(&quot;&quot;+result);
+            break;
+
+            case &quot;plus&quot;:
+            result= inp1+inp2;
+            screen.setText(&quot;&quot;+result);
+            break;
+        }
+        process();
+    }
+
+    private void plus(ActionEvent event)
+    {
+        inp1=Integer.parseInt(screen.getText());
+        screen.setText(&quot;&quot;);
+        op=&quot;plus&quot;;
+    }
+}
+</code></pre>
+        </div>
+    </div>
+    <hr>
+
+    <h3 id="fx4">Safe cracking<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    </svg></h3>
+    <div id="fxprog4" class="row">
+        <div class="col-6">
+            <div class="row">
+                <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+
+public class main extends Application
+{
+    @Override
+    public void start(Stage stage) throws Exception
+    {
+        Scene scene = new Scene(new safe(),500,500);
+        stage.setTitle(&quot;Safe&quot;);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+}
+</code></pre>
+            </div>
+            <div class="row">
+                <img src="{% static 'img/fx/fx4.gif' %}">
+            </div>
+        </div>
+
+        <div class="col-6">
+            <pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%"><code>import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import java.util.*;
+
+public class safe extends GridPane
+{
+    Button knob1 = new Button(&quot;0&quot;);
+    Button knob2 = new Button(&quot;0&quot;);
+    Button knob3 = new Button(&quot;0&quot;);
+    Button knob4 = new Button(&quot;0&quot;);
+
+    Button enter = new Button(&quot;Enter&quot;);
+    Button reset = new Button(&quot;Reset&quot;);
+
+    Label access = new Label(&quot;LOCKED&quot;);
+
+    int dial1 = 0;
+    int dial2 = 0;
+    int dial3 = 0;
+    int dial4 = 0;
+
+    Random rand = new Random();
+
+    String passcode1 =Integer.toString(rand.nextInt(9));
+    String passcode2 =Integer.toString(rand.nextInt(9));
+    String passcode3 =Integer.toString(rand.nextInt(9));
+    String passcode4 =Integer.toString(rand.nextInt(9));
+    public safe()
+    {
+        Font font = new Font(35);
+        knob1.setFont(font);
+        knob2.setFont(font);
+        knob3.setFont(font);
+        knob4.setFont(font);
+        enter.setFont(font);
+        reset.setFont(font);
+        access.setFont(font);
+
+        setStyle(&quot;-fx-background-color:lightgrey&quot;);
+
+        access.setStyle(&quot;-fx-background-color:red&quot;);
+        setAlignment(Pos.CENTER);
+        setHgap(5);
+        setVgap(5);
+
+        access.setAlignment(Pos.CENTER);
+        knob1.setAlignment(Pos.CENTER);
+        knob2.setAlignment(Pos.CENTER);
+        knob3.setAlignment(Pos.CENTER);
+        knob4.setAlignment(Pos.CENTER);
+        enter.setAlignment(Pos.CENTER);
+        reset.setAlignment(Pos.CENTER);
+
+        access.setMinSize(200,50);
+        knob1.setMinSize(100,100);
+        knob2.setMinSize(100,100);
+        knob3.setMinSize(100,100);
+        knob4.setMinSize(100,100);
+        enter.setMinSize(100,50);
+        reset.setMinSize(100,50);
+
+        add(access,1,0,2,1);
+        add(knob1,0,1);
+        add(knob2,1,1);
+        add(knob3,2,1);
+        add(knob4,3,1);
+        add(enter,1,4,2,1);
+        add(reset,1,5,2,1);
+        enter.setPrefWidth(200);
+        reset.setPrefWidth(200);
+
+        knob1.setOnAction(this::knob1);
+        knob2.setOnAction(this::knob2);
+        knob3.setOnAction(this::knob3);
+        knob4.setOnAction(this::knob4);
+
+        reset.setOnAction(this::reset);
+        enter.setOnAction(this::enter);
+    }
+
+    private void knob1(ActionEvent event)
+    {
+        if(Integer.parseInt(knob1.getText())&lt;9)
+        {
+            dial1 = Integer.parseInt(knob1.getText());
+            dial1 = dial1+1;
+            knob1.setText(Integer.toString(dial1));
+        }
+        else
+        {
+            knob1.setText(&quot;0&quot;);
+        }
+    }
+
+    private void knob2(ActionEvent event)
+    {
+        if(Integer.parseInt(knob2.getText())&lt;9)
+        {
+            dial2 = Integer.parseInt(knob2.getText());
+            dial2 = dial2+1;
+            knob2.setText(Integer.toString(dial2));
+        }
+        else
+        {
+            knob2.setText(&quot;0&quot;);
+        }
+    }
+
+    private void knob3(ActionEvent event)
+    {
+        if(Integer.parseInt(knob3.getText())&lt;9)
+        {
+            dial3 = Integer.parseInt(knob3.getText());
+            dial3 = dial3+1;
+            knob3.setText(Integer.toString(dial3));
+        }
+        else
+        {
+            knob3.setText(&quot;0&quot;);
+        }
+    }
+
+    private void knob4(ActionEvent event)
+    {
+        if(Integer.parseInt(knob4.getText())&lt;9)
+        {
+            dial4 = Integer.parseInt(knob4.getText());
+            dial4 = dial4+1;
+            knob4.setText(Integer.toString(dial4));
+        }
+        else
+        {
+            knob4.setText(&quot;0&quot;);
+        }
+    }
+
+    private void reset(ActionEvent event)
+    {
+        knob1.setText(&quot;0&quot;);
+        knob2.setText(&quot;0&quot;);
+        knob3.setText(&quot;0&quot;);
+        knob4.setText(&quot;0&quot;);
+
+        knob1.setStyle(&quot;-fx-border-color:clear; -fx-border-width: 5px;&quot;);
+        knob2.setStyle(&quot;-fx-border-color:clear; -fx-border-width: 5px;&quot;);
+        knob3.setStyle(&quot;-fx-border-color:clear; -fx-border-width: 5px;&quot;);
+        knob4.setStyle(&quot;-fx-border-color:clear; -fx-border-width: 5px;&quot;);
+
+        access.setText(&quot;LOCKED&quot;);
+        access.setStyle(&quot;-fx-background-color:red&quot;);
+
+        knob1.setDisable(false);
+        knob2.setDisable(false);
+        knob3.setDisable(false);
+        knob4.setDisable(false);
+        enter.setDisable(false);
+
+        passcode1 =Integer.toString(rand.nextInt(9));
+        passcode2 =Integer.toString(rand.nextInt(9));
+        passcode3 =Integer.toString(rand.nextInt(9));
+        passcode4 =Integer.toString(rand.nextInt(9));
+    }
+
+    private void enter(ActionEvent event)
+    {
+        Boolean p1=false;
+        Boolean p2=false;
+        Boolean p3=false;
+        Boolean p4=false;
+
+        if(knob1.getText().equals(passcode1))
+        {
+            knob1.setStyle(&quot;-fx-border-color:green; -fx-border-width: 5px;&quot;);
+            p1=true;
+        }
+        else
+        {
+            knob1.setStyle(&quot;-fx-border-color:red; -fx-border-width: 5px;&quot;);
+        }
+
+        if(knob2.getText().equals(passcode2))
+        {
+            knob2.setStyle(&quot;-fx-border-color:green; -fx-border-width: 5px;&quot;);
+            p2=true;
+        }
+        else
+        {
+            knob2.setStyle(&quot;-fx-border-color:red; -fx-border-width: 5px;&quot;);
+        }
+
+        if(knob3.getText().equals(passcode3))
+        {
+            knob3.setStyle(&quot;-fx-border-color:green; -fx-border-width: 5px;&quot;);
+            p3=true;
+        }
+        else
+        {
+            knob3.setStyle(&quot;-fx-border-color:red; -fx-border-width: 5px;&quot;);
+        }
+
+        if(knob4.getText().equals(passcode4))
+        {
+            knob4.setStyle(&quot;-fx-border-color:green; -fx-border-width: 5px;&quot;);
+            p4=true;
+        }
+        else
+        {
+            knob4.setStyle(&quot;-fx-border-color:red; -fx-border-width: 5px;&quot;);
+        }
+
+        if(p1&amp;&amp;p2&amp;&amp;p3&amp;&amp;p4==true)
+        {
+            access.setText(&quot;OPEN&quot;);
+            access.setStyle(&quot;-fx-background-color:green&quot;);
+
+            knob1.setDisable(true);
+            knob2.setDisable(true);
+            knob3.setDisable(true);
+            knob4.setDisable(true);
+            enter.setDisable(true);
+        }
+    }
+}
+</code></pre>
+        </div>
+    </div>
+    <hr>
+
+    <!--<h3 id="fx">sample<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
     </svg></h3>
     <div id="fxprog" class="row">
-        <div class="col">hey</div>
+        <div class="col-6">
+            <div class="row">
+
+            </div>
+            <div class="row">
+                <img src="{% static 'img/' %}">
+            </div>
+        </div>
+
+        <div class="col-6">
+
+        </div>
     </div>
-    <hr>
+    <hr>-->
 
 {% endblock %}

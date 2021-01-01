@@ -133,4 +133,32 @@ $(document).ready(function()
 
         });
     });
+
+    $( "#fxprog2" ).hide()
+    $( "#fx2" ).click(function() {
+        $( "#fxprog2" ).toggle( "slow", function() {
+
+        });
+    });
+
+    $( "#fxprog3" ).hide()
+    $( "#fx3" ).click(function() {
+        $( "#fxprog3" ).toggle( "slow", function() {
+
+        });
+    });
+
+    $( "#fxprog4" ).hide()
+    $( "#fx4" ).click(function() {
+        $( "#fxprog4" ).toggle( "slow", function() {
+
+        });
+    });
+
+    $( "#dsprog1" ).hide()
+    $( "#ds1" ).click(function() {
+        $( "#dsprog1" ).toggle( "slow", function() {
+
+        });
+    });
 });
